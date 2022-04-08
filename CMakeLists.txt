@@ -20,11 +20,16 @@ cmake_minimum_required(VERSION 3.5)
 
 project(AkVirtualCamera)
 
+# Use cmake --log-level=debug to get debug output.
+set(CMAKE_MESSAGE_LOG_LEVEL "DEBUG")
+
 include(commons.cmake)
 
+# 公共工具类模块
 add_subdirectory(VCamUtils)
 
 if (APPLE)
+    # Mac下虚拟摄像头实现
     add_subdirectory(cmio)
     set(TARGET_PLATFORM mac)
     set(BUILD_INFO_FILE AkVirtualCamera.plugin/Contents/Resources/build-info.txt)
@@ -34,6 +39,7 @@ if (APPLE)
     set(QTIFW_TARGET_DIR "\@ApplicationsDir\@/AkVirtualCamera")
     set(OUTPUT_FORMATS "MacPkg")
 elseif (WIN32)
+    # Windows下虚拟摄像头实现
     add_subdirectory(dshow)
     set(TARGET_PLATFORM windows)
     set(BUILD_INFO_FILE share/build-info.txt)
@@ -49,6 +55,7 @@ elseif (WIN32)
     set(OUTPUT_FORMATS "Nsis")
 endif ()
 
+# 管理工具模块
 add_subdirectory(Manager)
 
 configure_file(package_info.conf.in package_info.conf)

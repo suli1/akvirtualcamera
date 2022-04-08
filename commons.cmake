@@ -16,23 +16,32 @@
 #
 # Web-Site: http://webcamoid.github.io/
 
+
+# 配置版本号，环境检测等
+
 cmake_minimum_required(VERSION 3.5)
 
+# APPLE WIN32 -- 平台描述变量
 if (NOT APPLE AND NOT WIN32)
     message(FATAL_ERROR "This driver only works in Mac an Windows. For Linux check 'akvcam' instead.")
 endif ()
 
+# 加载CMake内置的模块CheckCXXSourceCompiles
+# 该模块检测提供的源代码是否可以编译为 C++ 源文件并链接为可执行文件（因此它必须至少包含一个main() 函数）。
 include(CheckCXXSourceCompiles)
 
 set(COMMONS_APPNAME AkVirtualCamera)
+# 将变量COMMONS_APPNAME转换成小写字母，并赋值到变量COMMONS_TARGET
 string(TOLOWER ${COMMONS_APPNAME} COMMONS_TARGET)
 
+# 设置版本号
 set(VER_MAJ 9)
 set(VER_MIN 1)
 set(VER_PAT 0)
 set(VERSION ${VER_MAJ}.${VER_MIN}.${VER_PAT})
 set(DAILY_BUILD OFF CACHE BOOL "Mark this as a daily build")
 
+# 添加编译器命令行参数
 add_definitions(-DCOMMONS_APPNAME="${COMMONS_APPNAME}"
                 -DCOMMONS_TARGET="${COMMONS_TARGET}"
                 -DCOMMONS_VER_MAJ="${VER_MAJ}"

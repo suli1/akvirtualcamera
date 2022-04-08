@@ -61,6 +61,7 @@ if (APPLE)
                    ${FOUNDATION_FRAMEWORK}
                    ${IOKIT_FRAMEWORK}
                    ${IOSURFACE_FRAMEWORK})
+    message(DEBUG "extra librarys: ${EXTRA_LIBS}")
     target_link_libraries(Manager
                           ${EXTRA_LIBS})
 elseif (WIN32)

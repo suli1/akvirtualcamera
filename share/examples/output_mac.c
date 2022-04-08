@@ -39,7 +39,7 @@
 int main()
 {
     // Set the parameters of the stream.
-    const char cmd[1024];
+    char cmd[1024];
     const char format[] = "RGB24";
     int width = 640;
     int height = 480;
@@ -52,7 +52,8 @@ int main()
              height);
 
     // Start the stream.
-    proc = popen(cmd, "w");
+    // AkVCamManager stream AkVCamVideoDevice0 RGB24 640 480
+    FILE *proc = popen(cmd, "w");
 
     // Allocate the frame buffer.
     size_t buffer_size = 3 * width * height;

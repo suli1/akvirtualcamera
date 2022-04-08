@@ -1,0 +1,15 @@
+{
+  "files.associations": {
+    "*.js": "javascriptreact",
+    "*.json": "json",
+    "__locale": "cpp",
+    "__threading_support": "cpp",
+    "locale": "cpp",
+    "thread": "cpp",
+    "memory": "cpp",
+    "utility": "cpp",
+    "complex": "cpp",
+    "string": "cpp",
+    "vector": "cpp"
+  }
+}
