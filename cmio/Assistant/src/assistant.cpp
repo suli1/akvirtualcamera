@@ -331,6 +331,7 @@ void AkVCam::AssistantPrivate::devicesUpdate(xpc_connection_t client,
 {
     UNUSED(client);
     AkLogFunction();
+    AkLog(AKVCAM_LOGLEVEL_DEFAULT) << "Assistant devicesUpdate" << std::endl;
 
     auto devicesList = xpc_dictionary_get_array(event, "devices");
     DeviceConfigs configs;
@@ -349,8 +350,10 @@ void AkVCam::AssistantPrivate::devicesUpdate(xpc_connection_t client,
     if (xpc_dictionary_get_bool(event, "propagate")) {
         auto notification = xpc_copy(event);
 
-        for (auto &peer: this->m_peers)
+        for (auto &peer: this->m_peers) {
             xpc_connection_send_message(peer.second, notification);
+            AkLogDebug() << "send message:" << notification << std::endl;
+        }
 
         xpc_release(notification);
     }

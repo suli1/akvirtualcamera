@@ -32,7 +32,7 @@ GLOBAL_STATIC(AkVCam::Assistant, assistant)
 int main(int argc, char **argv)
 {
     auto loglevel = AkVCam::Preferences::logLevel();
-    AkVCam::Logger::setLogLevel(loglevel);
+    AkVCam::Logger::setLogLevel(AKVCAM_LOGLEVEL_DEBUG);
     AkLogDebug() << "Creating Service: " << CMIO_ASSISTANT_NAME << std::endl;
     auto server =
             xpc_connection_create_mach_service(CMIO_ASSISTANT_NAME,

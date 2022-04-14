@@ -137,6 +137,8 @@ namespace AkVCam
 AkVCam::IpcBridge::IpcBridge(bool isVCam)
 {
     AkLogFunction();
+    AkLogDebug() << "isVCam:" << isVCam << std::endl;
+
     this->d = new IpcBridgePrivate(this);
     auto loglevel = AkVCam::Preferences::logLevel();
     AkVCam::Logger::setLogLevel(loglevel);
@@ -194,6 +196,7 @@ std::string AkVCam::IpcBridge::logPath(const std::string &logName) const
 bool AkVCam::IpcBridge::registerPeer(bool isVCam)
 {
     AkLogFunction();
+    AkLogDebug() << "registerPeer isVCam:" << isVCam << std::endl;
 
     if (this->d->m_serverMessagePort)
         return true;
@@ -207,6 +210,7 @@ bool AkVCam::IpcBridge::registerPeer(bool isVCam)
 
     AkLogDebug() << "Requesting service." << std::endl;
 
+    // 创建到CMIO_ASSISTANT_NAME服务的连接
     auto serverMessagePort =
             xpc_connection_create_mach_service(CMIO_ASSISTANT_NAME,
                                                nullptr,
@@ -954,9 +958,11 @@ const std::vector<AkVCam::DeviceControl> &AkVCam::IpcBridgePrivate::controls() c
     return controls;
 }
 
+// 从Preferences中读取摄像头id列表，通过xpc通信发送息到port
 void AkVCam::IpcBridgePrivate::updateDevices(xpc_connection_t port, bool propagate)
 {
     AkLogFunction();
+    AkLogDebug() << "propagate:" << propagate << std::endl;
 
     if (!port)
         return;
@@ -1139,6 +1145,8 @@ void AkVCam::IpcBridgePrivate::messageReceived(xpc_connection_t client,
 
 void AkVCam::IpcBridgePrivate::connectionInterrupted()
 {
+    AkLogFunction();
+
     for (auto bridge: this->m_bridges) {
         AKVCAM_EMIT(bridge, ServerStateChanged, IpcBridge::ServerStateGone)
         bridge->unregisterPeer();

@@ -23,12 +23,13 @@
 #include "VCamUtils/src/ipcbridge.h"
 #include "VCamUtils/src/logger.h"
 
+// DAL插件入口函数
 extern "C" void *akPluginMain(CFAllocatorRef allocator,
                               CFUUIDRef requestedTypeUUID)
 {
     UNUSED(allocator);
     auto loglevel = AkVCam::Preferences::logLevel();
-    AkVCam::Logger::setLogLevel(loglevel);
+    AkVCam::Logger::setLogLevel(AKVCAM_LOGLEVEL_DEBUG);
 
     if (AkVCam::Logger::logLevel() > AKVCAM_LOGLEVEL_DEFAULT) {
         // Turn on lights

@@ -364,8 +364,11 @@ AkVCam::CmdParser::~CmdParser()
     delete this->d;
 }
 
+// 命令行入口
 int AkVCam::CmdParser::parse(int argc, char **argv)
 {
+    AkLogDebug() << "parse command:" << argv << std::endl;
+
     auto program = this->d->basename(argv[0]);
     auto command = &this->d->m_commands[0];
     StringMap flags;
@@ -434,6 +437,7 @@ int AkVCam::CmdParser::parse(int argc, char **argv)
         }
     }
 
+    // 虚拟摄像头已被占用
     if (!this->d->m_force && this->d->m_ipcBridge.isBusyFor(command->command)) {
         std::cerr << "This operation is not permitted." << std::endl;
         std::cerr << "The virtual camera is in use. Stop or close the virtual "
@@ -459,6 +463,7 @@ int AkVCam::CmdParser::parse(int argc, char **argv)
         return -EBUSY;
     }
 
+    // 需要权限
     if (this->d->m_ipcBridge.needsRoot(command->command)
         || (command->command == "hack"
             && arguments.size() >= 2
@@ -853,6 +858,7 @@ int AkVCam::CmdParserPrivate::showDevices(const StringMap &flags,
     UNUSED(flags);
     UNUSED(args);
 
+    // 获取到设置信息
     auto devices = this->m_ipcBridge.devices();
 
     if (devices.empty())
@@ -860,6 +866,7 @@ int AkVCam::CmdParserPrivate::showDevices(const StringMap &flags,
 
     std::sort(devices.begin(), devices.end());
 
+    // 在控制台上打印设备信息
     if (this->m_parseable) {
         for (auto &device: devices)
             std::cout << device << std::endl;

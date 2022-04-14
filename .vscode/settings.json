@@ -10,6 +10,13 @@
     "utility": "cpp",
     "complex": "cpp",
     "string": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "chrono": "cpp",
+    "csignal": "cpp",
+    "cstdlib": "cpp",
+    "mutex": "cpp",
+    "iostream": "cpp",
+    "*.mm": "cpp",
+    "iosfwd": "cpp"
   }
 }

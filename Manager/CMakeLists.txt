@@ -31,10 +31,12 @@ elseif (WIN32)
     set(INSTALLPATH ${TARGET_ARCH})
 endif ()
 
+# 可执行文件Manager
 add_executable(Manager
                src/cmdparser.h
                src/main.cpp
                src/cmdparser.cpp)
+# 设置Manager的属性: 输出名字，输出的目录
 set_target_properties(Manager PROPERTIES
                       OUTPUT_NAME AkVCamManager
                       RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/${INSTALLPATH})
