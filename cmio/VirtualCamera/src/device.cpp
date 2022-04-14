@@ -21,6 +21,7 @@
 #include "PlatformUtils/src/utils.h"
 #include "VCamUtils/src/logger.h"
 
+// Device - 1.初始化
 AkVCam::Device::Device(CMIOHardwarePlugInRef pluginInterface,
                        bool registerObject):
     AkVCam::Object(pluginInterface)
@@ -40,6 +41,7 @@ AkVCam::Device::~Device()
     this->registerObject(false);
 }
 
+// Devcie - 2.创建Object
 OSStatus AkVCam::Device::createObject()
 {
     AkLogFunction();
@@ -65,6 +67,7 @@ OSStatus AkVCam::Device::createObject()
     return status;
 }
 
+// Device - 4.注册设备
 OSStatus AkVCam::Device::registerObject(bool regist)
 {
     AkLogFunction();
@@ -137,6 +140,7 @@ std::list<AkVCam::StreamPtr> AkVCam::Device::addStreams(int n)
     return streams;
 }
 
+// Device - 3.注册输出流
 OSStatus AkVCam::Device::registerStreams(bool regist)
 {
     AkLogFunction();
@@ -200,6 +204,7 @@ void AkVCam::Device::serverStateChanged(IpcBridge::ServerState state)
         stream.second->serverStateChanged(state);
 }
 
+// Device - 把视频流输入到设备
 void AkVCam::Device::frameReady(const AkVCam::VideoFrame &frame)
 {
     for (auto &stream: this->m_streams)

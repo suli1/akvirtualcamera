@@ -1012,6 +1012,7 @@ void AkVCam::IpcBridgePrivate::deviceUpdate(xpc_connection_t client,
         AKVCAM_EMIT(bridge, DevicesChanged, devices)
 }
 
+// Assistant - 转发视频流
 void AkVCam::IpcBridgePrivate::frameReady(xpc_connection_t client,
                                           xpc_object_t event)
 {
@@ -1037,6 +1038,7 @@ void AkVCam::IpcBridgePrivate::frameReady(xpc_connection_t client,
         IOSurfaceUnlock(surface, kIOSurfaceLockReadOnly, &surfaceSeed);
         CFRelease(surface);
 
+        // 给Devcie发送视频流
         for (auto bridge: this->m_bridges)
             AKVCAM_EMIT(bridge, FrameReady, deviceId, videoFrame)
     }

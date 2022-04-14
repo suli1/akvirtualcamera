@@ -289,6 +289,7 @@ void AkVCam::Stream::serverStateChanged(IpcBridge::ServerState state)
     }
 }
 
+// Device - 输入视频流
 void AkVCam::Stream::frameReady(const AkVCam::VideoFrame &frame)
 {
     AkLogFunction();
@@ -515,6 +516,7 @@ void AkVCam::StreamPrivate::stopTimer()
     this->m_timer = nullptr;
 }
 
+// Device - 循环读取视频流
 void AkVCam::StreamPrivate::streamLoop(CFRunLoopTimerRef timer, void *info)
 {
     UNUSED(timer);

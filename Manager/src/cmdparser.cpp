@@ -364,7 +364,7 @@ AkVCam::CmdParser::~CmdParser()
     delete this->d;
 }
 
-// 命令行入口
+// Cmd - 命令行入口
 int AkVCam::CmdParser::parse(int argc, char **argv)
 {
     AkLogDebug() << "parse command:" << argv << std::endl;
@@ -852,6 +852,7 @@ int AkVCam::CmdParserPrivate::showHelp(const StringMap &flags,
     return 0;
 }
 
+// Cmd - 处理'AkVCamManager devices'命令
 int AkVCam::CmdParserPrivate::showDevices(const StringMap &flags,
                                           const StringVector &args)
 {
@@ -888,6 +889,7 @@ int AkVCam::CmdParserPrivate::showDevices(const StringMap &flags,
     return 0;
 }
 
+// Cmd - 处理'AkVCamManager add-devices'命令
 int AkVCam::CmdParserPrivate::addDevice(const StringMap &flags,
                                         const StringVector &args)
 {
@@ -1297,6 +1299,7 @@ int AkVCam::CmdParserPrivate::loadSettings(const AkVCam::StringMap &flags,
     return 0;
 }
 
+// Cmd - 输入视频流
 int AkVCam::CmdParserPrivate::stream(const AkVCam::StringMap &flags,
                                      const AkVCam::StringVector &args)
 {

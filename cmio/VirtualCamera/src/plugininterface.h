@@ -25,6 +25,7 @@
 
 namespace AkVCam
 {
+    // 实现了DAL插件的基本功能(初始化，卸载等)
     struct PluginInterfacePrivate;
 
     class PluginInterface: public ObjectInterface

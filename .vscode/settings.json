@@ -17,6 +17,11 @@
     "mutex": "cpp",
     "iostream": "cpp",
     "*.mm": "cpp",
-    "iosfwd": "cpp"
+    "iosfwd": "cpp",
+    "__config": "cpp",
+    "algorithm": "cpp",
+    "map": "cpp",
+    "filesystem": "cpp",
+    "ostream": "cpp"
   }
 }

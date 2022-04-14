@@ -35,6 +35,7 @@ namespace AkVCam
     struct PluginInterfacePrivate
     {
         public:
+            // CFPlugIn DAL插件接口
             CMIOHardwarePlugInInterface *pluginInterface;
             PluginInterface *self;
             ULONG m_ref;
@@ -123,6 +124,7 @@ AkVCam::PluginInterface::PluginInterface():
     this->m_className = "PluginInterface";
     this->d = new PluginInterfacePrivate;
     this->d->self = this;
+    // Plugin - DAL插件实现
     this->d->pluginInterface = new CMIOHardwarePlugInInterface {
         //	Padding for COM
         NULL,
@@ -157,6 +159,7 @@ AkVCam::PluginInterface::PluginInterface():
     this->d->m_ref = 0;
     this->d->m_reserved = 0;
 
+    // Plugin - 与Assistant建立联系
     this->d->m_ipcBridge.connectServerStateChanged(this, &PluginInterface::serverStateChanged);
     this->d->m_ipcBridge.connectDevicesChanged(this, &PluginInterface::devicesChanged);
     this->d->m_ipcBridge.connectFrameReady(this, &PluginInterface::frameReady);
@@ -176,6 +179,7 @@ CMIOObjectID AkVCam::PluginInterface::objectID() const
     return this->m_objectID;
 }
 
+// 返回DAL插件的功能(初始化，卸载等)
 CMIOHardwarePlugInRef AkVCam::PluginInterface::create()
 {
     AkLogFunction();
@@ -268,6 +272,7 @@ void AkVCam::PluginInterface::serverStateChanged(void *userData,
         self->d->updateDevices();
 }
 
+// Plugin - 由Assistant通知设备更新
 void AkVCam::PluginInterface::devicesChanged(void *userData,
                                              const std::vector<std::string> &devices)
 {
@@ -276,6 +281,7 @@ void AkVCam::PluginInterface::devicesChanged(void *userData,
     auto self = reinterpret_cast<PluginInterface *>(userData);
     std::vector<std::string> oldDevices;
 
+    // 1. 查询出所有旧设备信息
     for (auto &device: self->m_devices) {
         std::string deviceId;
         device->properties().getProperty(kCMIODevicePropertyDeviceUID,
@@ -283,9 +289,11 @@ void AkVCam::PluginInterface::devicesChanged(void *userData,
         oldDevices.push_back(deviceId);
     }
 
+    // 2. 移除就设备
     for (auto &deviceId: oldDevices)
         self->destroyDevice(deviceId);
 
+    // 3. 创建新设备
     for (auto &deviceId: self->d->m_ipcBridge.devices()) {
         auto description = self->d->m_ipcBridge.description(deviceId);
         auto formats = self->d->m_ipcBridge.formats(deviceId);
@@ -372,6 +380,7 @@ void AkVCam::PluginInterface::removeListener(void *userData,
     self->d->m_ipcBridge.removeListener(deviceId);
 }
 
+// Plugin - 创建虚拟设备
 bool AkVCam::PluginInterface::createDevice(const std::string &deviceId,
                                            const std::string &description,
                                            const std::vector<VideoFormat> &formats)
