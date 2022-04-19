@@ -22,6 +22,9 @@
     "algorithm": "cpp",
     "map": "cpp",
     "filesystem": "cpp",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "cstdio": "c",
+    "fstream": "c",
+    "ctime": "c"
   }
 }

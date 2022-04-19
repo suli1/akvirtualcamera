@@ -96,6 +96,7 @@ void AkVCam::Assistant::setTimeout(double timeout)
     this->d->m_timeout = timeout;
 }
 
+// Assistant - receive message
 void AkVCam::Assistant::messageReceived(xpc_connection_t client,
                                         xpc_object_t event)
 {
@@ -326,6 +327,7 @@ void AkVCam::AssistantPrivate::removePort(xpc_connection_t client,
     this->removePortByName(xpc_dictionary_get_string(event, "port"));
 }
 
+// Assistant - 收到更新设备的消息
 void AkVCam::AssistantPrivate::devicesUpdate(xpc_connection_t client,
                                              xpc_object_t event)
 {

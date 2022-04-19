@@ -435,6 +435,7 @@ bool AkVCam::PluginInterface::createDevice(const std::string &deviceId,
     if (device->createObject() != kCMIOHardwareNoError)
         goto createDevice_failed;
 
+    // 给虚拟摄像头新增输出流
     stream = device->addStream();
 
     // Register one stream for this device.
@@ -442,6 +443,7 @@ bool AkVCam::PluginInterface::createDevice(const std::string &deviceId,
         goto createDevice_failed;
 
     stream->setBridge(&this->d->m_ipcBridge);
+    // 设置流支持的格式
     stream->setFormats(formats);
     stream->properties().setProperty(kCMIOStreamPropertyDirection, 0);
 

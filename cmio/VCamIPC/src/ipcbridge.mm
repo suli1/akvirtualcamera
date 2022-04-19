@@ -134,6 +134,10 @@ namespace AkVCam
     }
 }
 
+// IPC - 进程间通信工具初始化
+// isVCam: 
+// true: 虚拟摄像头插件发起的ipc
+// false: Cmd发起的ipc
 AkVCam::IpcBridge::IpcBridge(bool isVCam)
 {
     AkLogFunction();
@@ -958,7 +962,7 @@ const std::vector<AkVCam::DeviceControl> &AkVCam::IpcBridgePrivate::controls() c
     return controls;
 }
 
-// 从Preferences中读取摄像头id列表，通过xpc通信发送息到port
+// IPC - 从Preferences中读取摄像头id列表，通过xpc通信发送息到port
 void AkVCam::IpcBridgePrivate::updateDevices(xpc_connection_t port, bool propagate)
 {
     AkLogFunction();

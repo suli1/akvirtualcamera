@@ -32,6 +32,7 @@ namespace AkVCam
 {
     using FourCC = uint32_t;
 
+    // Stream - 视频格式
     enum PixelFormat
     {
         // RGB formats
@@ -47,8 +48,8 @@ namespace AkVCam
         PixelFormatBGR15 = MKFOURCC('B', 'G', 'R', 15),
 
         // Luminance+Chrominance formats
-        PixelFormatUYVY = MKFOURCC('U', 'Y', 'V', 'Y'),
-        PixelFormatYUY2 = MKFOURCC('Y', 'U', 'Y', '2'),
+        PixelFormatUYVY = MKFOURCC('U', 'Y', 'V', 'Y'), 
+        PixelFormatYUY2 = MKFOURCC('Y', 'U', 'Y', '2'), // YUV422
 
         // two planes -- one Y, one Cr + Cb interleaved
         PixelFormatNV12 = MKFOURCC('N', 'V', '1', '2'),

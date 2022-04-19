@@ -46,6 +46,8 @@ namespace AkVCam {
             uint8_t x;
         };
 
+        // Stream - all supported formats on Mac
+        // 虚拟摄像头支持的所有格式
         inline const std::map<AkVCam::PixelFormat, FourCharCode> *formatsTable()
         {
             static const std::map<AkVCam::PixelFormat, FourCharCode> formatsTable {

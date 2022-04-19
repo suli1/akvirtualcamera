@@ -109,6 +109,7 @@ AkVCam::StreamPtr AkVCam::Device::addStream()
     auto stream = StreamPtr(new Stream(false, this));
 
     if (stream->createObject() == kCMIOHardwareNoError) {
+        // 创建流成功，添加到m_stream中，并更新属性
         this->m_streams[stream->objectID()] = stream;
         this->updateStreamsProperty();
 

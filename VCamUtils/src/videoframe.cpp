@@ -137,6 +137,7 @@ namespace AkVCam
             explicit VideoFramePrivate(VideoFrame *self):
                 self(self)
             {
+                // Stream - 视频格式转换函数表
                 this->m_convert = {
                     {PixelFormatBGR24, PixelFormatRGB32, bgr24_to_rgb32},
                     {PixelFormatBGR24, PixelFormatRGB24, bgr24_to_rgb24},

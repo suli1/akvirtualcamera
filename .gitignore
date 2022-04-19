@@ -129,3 +129,4 @@ release
 *_priv.*
 
 .vscode/
+share/examples/a.out

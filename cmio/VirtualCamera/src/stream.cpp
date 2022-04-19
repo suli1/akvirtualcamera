@@ -637,6 +637,7 @@ void AkVCam::StreamPrivate::updateTestFrame()
     this->m_testFrameAdapted = this->applyAdjusts(this->m_testFrame);
 }
 
+// Stream - 输入的视频流转换成虚拟摄像头支持的格式
 AkVCam::VideoFrame AkVCam::StreamPrivate::applyAdjusts(const VideoFrame &frame)
 {
     AkLogFunction();
